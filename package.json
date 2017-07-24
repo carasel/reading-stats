@@ -1,0 +1,19 @@
+{
+  "name": "reading-stats",
+  "version": "0.0.1",
+  "description": "A web app for viewing stats about your reading habits pulled from Goodreads",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carasel/reading-stats.git"
+  },
+  "author": "Steph Clacksman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/carasel/reading-stats/issues"
+  },
+  "homepage": "https://github.com/carasel/reading-stats#readme"
+}
