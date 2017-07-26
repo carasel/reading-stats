@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express')
     , path = require('path')
     , favicon = require('serve-favicon')
@@ -5,6 +6,7 @@ const express = require('express')
     , cookieParser = require('cookie-parser')
     , bodyParser = require('body-parser')
     , sassMiddleware = require('node-sass-middleware');
+
 
 const index = require('./routes/index');
 
