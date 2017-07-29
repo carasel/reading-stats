@@ -2,12 +2,9 @@ const express = require("express")
     , request = require("request-promise-native")
     , router = express.Router();
 
-let allBooksUrl = "https://www.goodreads.com/review/list/1993254.xml";
-let allBooksUrlParams = {
+let goodreadsParams = {
     "v" : "2",
-    "key" : process.env.GOODREADS_KEY,
-    "page" : 1,
-    "per_page" : 100
+    "key" : process.env.GOODREADS_KEY
 };
 
 router.get("/", (req, res) => {
@@ -15,9 +12,12 @@ router.get("/", (req, res) => {
 });
 
 router.get("/ingest/:user", (req, res) => {
-    const options = {
-        uri : allBooksUrl,
-        qs : allBooksUrlParams
+    let allBooksParams = goodreadsParams;
+    allBooksParams["per_page"] = 100;
+    allBooksParams["page"] = 1;
+    let options = {
+        uri : `https://www.goodreads.com/review/list/${req.params.user}.xml`,
+        qs : allBooksParams
     };
     request(options)
         .then((books) => {
