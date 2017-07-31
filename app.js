@@ -4,7 +4,8 @@ const express = require('express')
     , morgan = require('morgan')
     , cookieParser = require('cookie-parser')
     , bodyParser = require('body-parser')
-    , sassMiddleware = require('node-sass-middleware');
+    , sassMiddleware = require('node-sass-middleware')
+    , helmet = require('helmet');
 
 
 const index = require('./routes/index');
@@ -15,6 +16,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(helmet());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
