@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/ingest/:user", (req, res) => {
-    callAllBooks(req.params.user, 1)
+    getBooks(req.params.user, 1, [])
         .then(books => {
             res.status(200).send(books);
         })
@@ -24,27 +24,23 @@ router.get("/ingest/:user", (req, res) => {
         });
 });
 
-function callAllBooks(user, page){
+function getBooks(user, page, allBooks){
     let allBooksParams = goodreadsParams;
     allBooksParams["per_page"] = 100;
     allBooksParams["page"] = page;
     let options = {
-        uri : `https://www.goodreads.com/review/list/${req.params.user}.xml`,
+        uri : `https://www.goodreads.com/review/list/${user}.xml`,
         qs : allBooksParams
     };
-    let allBooks;
-    request(options)
+    return request(options)
         .then((books) => {
-            //TODO check if all books
-            if (!gotAllBooks) {
-                //TODO add books to all books
-                callAllBooks(user, page++)
-            } else {
-                //TODO return books in promise
-            }
+            console.log(`Got page ${page} of books`);
+            allBooks.push(books);
+            return page === 2 ? Promise.resolve(allBooks) : getBooks(user, ++page, allBooks);
         })
         .catch((error) => {
-            // TODO return error to calling function
+            console.error(`Error requesting books: + ${error}`);
+            return Promise.reject(error);
         });
 }
 
