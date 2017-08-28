@@ -20,8 +20,8 @@ router.get("/ingest/:user", (req, res) => {
             res.status(200).send(books);
         })
         .catch(error => {
-            console.error(`Error getting books from Goodreads API: ${error}`);
-            res.status(500).send("Error getting books from Goodreads API");
+            console.error(`Error ingesting book reviews: ${error}`);
+            res.status(500).send("Error ingesting book reviews");
         });
 });
 
@@ -34,10 +34,12 @@ function getBooks(user, page, allBooks){
         qs : allBooksParams
     };
     return request(options)
-        .then((books) => {
+        .then((response) => {
             console.log(`Got page ${page} of books`);
-            allBooks = allBooks.concat(bookListConverter.convertToJson(books));
-            return page === 2 ? Promise.resolve(allBooks) : getBooks(user, ++page, allBooks);
+            const jsonResponse = bookListConverter.convertToJson(response);
+            allBooks = allBooks.concat(jsonResponse.review);
+            //TODO there is an error in the json when there are more than 4 pages of books
+            return jsonResponse.end === jsonResponse.total ? Promise.resolve(allBooks) : getBooks(user, ++page, allBooks);
         })
         .catch((error) => {
             console.error(`Error requesting books: + ${error}`);
