@@ -36,7 +36,7 @@ function getBooks(user, page, allBooks){
     return request(options)
         .then((books) => {
             console.log(`Got page ${page} of books`);
-            allBooks.push(bookListConverter.convertToJson(books));
+            allBooks = allBooks.concat(bookListConverter.convertToJson(books));
             return page === 2 ? Promise.resolve(allBooks) : getBooks(user, ++page, allBooks);
         })
         .catch((error) => {
