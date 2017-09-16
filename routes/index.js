@@ -2,7 +2,7 @@
 
 const express = require("express")
     , router = express.Router()
-    , validator = require('validator')
+    , validator = require("validator")
     , goodreadsIngester = require("../logic/goodreads-ingester");
 
 router.get("/", (req, res) => {
@@ -21,8 +21,9 @@ router.get("/ingest", (req, res) => {
                 res.status(500).send("Error ingesting book reviews");
             });
     } else {
-        console.error(`Error: Expected numeric user ID, received: ${userId}`);
-        res.status(500).send("User ID must be numeric");
+        const errorMessage = `Error: Expected numeric user ID, received: ${userId}`;
+        console.error(errorMessage);
+        res.render("index", { errors : [ { message : errorMessage } ] });
     }
 });
 

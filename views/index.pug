@@ -1,8 +1,12 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to #{title}
+    h1 Reading Stats
+    p Stats about your reading habits, based on your Goodreads profile
+    if errors
+        ul
+            each error in errors
+                li(style={color:"red"})= error.message
     form(action="/ingest" method="GET")
         p Enter your user ID:
             input(name="user")
