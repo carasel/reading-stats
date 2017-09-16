@@ -1,5 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    h1= title
+    p Welcome to #{title}
+    form(action="/ingest" method="GET")
+        p Enter your user ID:
+            input(name="user")
+        input(type="submit")
