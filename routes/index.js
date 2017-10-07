@@ -6,15 +6,15 @@ const express = require("express")
     , goodreadsIngester = require("../logic/goodreads-ingester");
 
 router.get("/", (req, res) => {
-    res.render("index", { title: "Reading Stats" });
+    res.render("index");
 });
 
 router.get("/ingest", (req, res) => {
     const userId = req.query.user;
     if (validator.isNumeric(userId)) {
-        goodreadsIngester.getBooks(req.query.user)
+        goodreadsIngester.ingestBooks(req.query.user)
             .then(books => {
-                res.status(200).send(books);
+                res.status(200).send("Your books have been ingested from Goodreads!");
             })
             .catch(error => {
                 console.error(`Error ingesting book reviews: ${error}`);

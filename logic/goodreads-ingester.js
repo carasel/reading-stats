@@ -1,11 +1,19 @@
 "use strict";
 
 const request = require("request-promise-native")
+    , fs = require("fs-extra")
     , bookListConverter = require("./../logic/book-list-converter");
 
 const goodreadsParams = {
     "v" : "2",
     "key" : process.env.GOODREADS_KEY
+};
+
+const ingestBooks = function(user) {
+    return getBooks(user)
+        .then((books) => {
+            saveBooks(user, books)
+        });
 };
 
 const getBooks = function(user, page, allBooks) {
@@ -33,6 +41,19 @@ const getBooks = function(user, page, allBooks) {
         });
 };
 
+const saveBooks = function(user, books) {
+    const file = `./data/${user}.json`;
+
+    return fs.writeJson(file, books)
+        .then(() => {
+            return Promise.resolve(books);
+        })
+        .catch((error) => {
+            console.error(`Error saving books: + ${error}`);
+            return Promise.reject(error);
+        });
+};
+
 module.exports = {
-    getBooks: getBooks
+    ingestBooks: ingestBooks
 };
