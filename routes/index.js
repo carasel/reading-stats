@@ -12,9 +12,9 @@ router.get("/", (req, res) => {
 router.get("/ingest", (req, res) => {
     const userId = req.query.user;
     if (validator.isNumeric(userId)) {
-        goodreadsIngester.ingestBooks(req.query.user)
-            .then(books => {
-                res.status(200).send("Your books have been ingested from Goodreads!");
+        goodreadsIngester.ingestBooks(userId)
+            .then(() => {
+                res.render("stats", { user : userId });
             })
             .catch(error => {
                 console.error(`Error ingesting book reviews: ${error}`);
