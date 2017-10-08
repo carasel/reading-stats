@@ -25,6 +25,31 @@ const calculateTopAuthors = function(books) {
     return(authors);
 };
 
+const getHighestRated = function(books, number) {
+    books.sort((a,b) => {
+        const ratingA = a.book.average_rating;
+        const ratingB = b.book.average_rating;
+        if(ratingA > ratingB) return -1;
+        else return 1;
+    });
+
+    let smallBooks = [];
+
+    books.slice(0,number).forEach((book) => {
+        const smallBook = {
+            "title": book.book.title,
+            "author": book.book.authors.author.name,
+            "average_rating": book.book.average_rating,
+            "user_rating": book.rating
+        };
+        smallBooks.push(smallBook);
+    });
+
+    console.log(smallBooks);
+    return smallBooks;
+};
+
 module.exports = {
-    calculateTopAuthors: calculateTopAuthors
+    calculateTopAuthors: calculateTopAuthors,
+    getHighestRated: getHighestRated
 };

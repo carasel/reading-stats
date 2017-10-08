@@ -1,1 +1,46 @@
-[{"book":{"authors":{"author":{"name":"Neil Gaiman"}}}},{"book":{"authors":{"author":{"name":"Terry Pratchett"}}}},{"book":{"authors":{"author":{"name":"Terry Pratchett"}}}},{"book":{"authors":{"author":{"name":"Terry Pratchett"}}}}]
+[
+  {
+    "book": {
+      "authors": {
+        "author": {
+          "name":"Neil Gaiman"
+        }
+      },
+      "average_rating": 4.3
+    },
+    "rating": 4
+  },
+  {
+    "book": {
+      "authors": {
+        "author": {
+          "name":"Terry Pratchett"
+        }
+      },
+      "average_rating": 4.5
+    },
+    "rating": 5
+  },
+  {
+    "book": {
+      "authors": {
+        "author": {
+          "name":"Terry Pratchett"
+        }
+      },
+      "average_rating": 3.6
+    },
+    "rating": 4
+  },
+  {
+    "book": {
+      "authors": {
+        "author": {
+          "name":"Terry Pratchett"
+        }
+      },
+      "average_rating": 3.8
+    },
+    "rating": 3
+  }
+]
