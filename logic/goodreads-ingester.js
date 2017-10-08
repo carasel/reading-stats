@@ -23,6 +23,7 @@ const getBooks = function(user, page, allBooks) {
     let allBooksParams = goodreadsParams;
     allBooksParams["per_page"] = 100;
     allBooksParams["page"] = page;
+    allBooksParams["shelf"] = "read";
 
     let options = {
         uri : `https://www.goodreads.com/review/list/${user}.xml`,
