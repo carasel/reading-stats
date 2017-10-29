@@ -7,9 +7,9 @@ describe("statsCalculator", function(){
     describe("calculateTopAuthors", function(){
 
         it("returns an array of authors with read counts, sorted by read count descending", function(){
-            let input = require("./../data/test.json");
-            //let input = require("./../../data/1993254.json");
-            let output = StatsCalculator.calculateTopAuthors(input);
+            const input = require("./../data/test.json");
+            //const input = require("./../../data/1993254.json");
+            const output = StatsCalculator.calculateTopAuthors(input);
             output.should.be.an.Array();
             output[0].author.should.equal("Terry Pratchett");
             output[0].count.should.equal(3);
@@ -21,9 +21,10 @@ describe("statsCalculator", function(){
     describe("getHighestRated", function(){
 
         it("returns an array of n books with their average ratings and the user's rating", function(){
-            let input = require("./../data/test.json");
-            //let input = require("./../../data/1993254.json");
-            let output = StatsCalculator.getHighestRated(input, 10);
+            const input = require("./../data/test.json");
+            //const input = require("./../../data/1993254.json");
+            const output = StatsCalculator.getHighestRated(input, 10);
+            console.log(output);
             output.should.be.an.Array();
             output[0].author.should.equal("Terry Pratchett");
             output[0].average_rating.should.equal(4.5);
