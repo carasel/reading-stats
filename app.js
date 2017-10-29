@@ -9,7 +9,8 @@ const express = require("express")
     , sassMiddleware = require("node-sass-middleware")
     , helmet = require("helmet");
 
-const index = require("./routes/index");
+const index = require("./routes/index")
+    , statsRouter = require("./routes/stats-router");
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", index);
+app.use("/stats/", statsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
